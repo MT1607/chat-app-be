@@ -1,0 +1,14 @@
+{
+    "extends": "./tsconfig.base.json",
+    "compilerOptions": {
+        "composite": true,
+    },
+    "files": [],
+    "references": [
+        {"path": "./packages/common"},
+        {"path": "./packages/user-service"},
+        {"path": "./packages/gateway-service"},
+        {"path": "./packages/chat-service"},
+        {"path": "./packages/auth-service"}
+    ]
+}
