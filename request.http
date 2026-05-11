@@ -1,0 +1,177 @@
+### Auth Service Testing
+### Base URL for auth service running on port 4003
+
+@baseUrl = http://localhost:4003
+@contentType = application/json
+
+### ============================================
+### REGISTER ENDPOINT TESTS
+### ============================================
+
+### Register - Valid request (Success)
+POST {{baseUrl}}/auth/register
+Content-Type: {{contentType}}
+
+{
+  "email": "testuser@example.com",
+  "password": "Password123!",
+  "displayName": "Test User"
+}
+
+### Register - Valid request with different user
+POST {{baseUrl}}/auth/register
+Content-Type: {{contentType}}
+
+{
+  "email": "anotheruser@example.com",
+  "password": "SecurePass456!",
+  "displayName": "Another User"
+}
+
+### Register - Duplicate email (should fail with 409)
+POST {{baseUrl}}/auth/register
+Content-Type: {{contentType}}
+
+{
+  "email": "testuser@example.com",
+  "password": "DifferentPass789!",
+  "displayName": "Duplicate User"
+}
+
+### Register - Invalid email format
+POST {{baseUrl}}/auth/register
+Content-Type: {{contentType}}
+
+{
+  "email": "invalidemail",
+  "password": "Password123!",
+  "displayName": "Invalid Email User"
+}
+
+### Register - Password too short (less than 8 characters)
+POST {{baseUrl}}/auth/register
+Content-Type: {{contentType}}
+
+{
+  "email": "shortpass@example.com",
+  "password": "Pass12!",
+  "displayName": "Short Password User"
+}
+
+### Register - Display name too short (less than 3 characters)
+POST {{baseUrl}}/auth/register
+Content-Type: {{contentType}}
+
+{
+  "email": "shortname@example.com",
+  "password": "Password123!",
+  "displayName": "AB"
+}
+
+### Register - Display name too long (more than 30 characters)
+POST {{baseUrl}}/auth/register
+Content-Type: {{contentType}}
+
+{
+  "email": "longname@example.com",
+  "password": "Password123!",
+  "displayName": "This is a very long display name that exceeds limits"
+}
+
+### Register - Missing required field (email)
+POST {{baseUrl}}/auth/register
+Content-Type: {{contentType}}
+
+{
+  "password": "Password123!",
+  "displayName": "No Email User"
+}
+
+### Register - Missing required field (password)
+POST {{baseUrl}}/auth/register
+Content-Type: {{contentType}}
+
+{
+  "email": "nopass@example.com",
+  "displayName": "No Password User"
+}
+
+### Register - Missing required field (displayName)
+POST {{baseUrl}}/auth/register
+Content-Type: {{contentType}}
+
+{
+  "email": "noname@example.com",
+  "password": "Password123!"
+}
+
+### ============================================
+### LOGIN ENDPOINT TESTS (Placeholder)
+### ============================================
+
+### Login - Valid credentials
+POST {{baseUrl}}/auth/login
+Content-Type: {{contentType}}
+
+{
+  "email": "testuser@example.com",
+  "password": "Password123!"
+}
+
+### Login - Invalid email
+POST {{baseUrl}}/auth/login
+Content-Type: {{contentType}}
+
+{
+  "email": "wrongemail@example.com",
+  "password": "Password123!"
+}
+
+### Login - Invalid password
+POST {{baseUrl}}/auth/login
+Content-Type: {{contentType}}
+
+{
+  "email": "testuser@example.com",
+  "password": "WrongPassword123!"
+}
+
+### ============================================
+### REFRESH TOKEN ENDPOINT TESTS (Placeholder)
+### ============================================
+
+### Refresh Token - Valid refresh token
+POST {{baseUrl}}/auth/refresh
+Content-Type: {{contentType}}
+
+{
+  "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+}
+
+### Refresh Token - Invalid refresh token
+POST {{baseUrl}}/auth/refresh
+Content-Type: {{contentType}}
+
+{
+  "refreshToken": "invalidtoken123"
+}
+
+### ============================================
+### REVOKE TOKEN ENDPOINT TESTS (Placeholder)
+### ============================================
+
+### Revoke Token - Valid user UUID
+POST {{baseUrl}}/auth/revoke
+Content-Type: {{contentType}}
+
+{
+  "userId": "550e8400-e29b-41d4-a716-446655440000"
+}
+
+### Revoke Token - Invalid UUID format
+POST {{baseUrl}}/auth/revoke
+Content-Type: {{contentType}}
+
+{
+  "userId": "not-a-valid-uuid"
+}
