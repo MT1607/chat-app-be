@@ -4,15 +4,14 @@
     "outDir": "dist",
     "rootDir": "src",
     "composite": true,
-    "tsBuildInfoFile": "dist/tsconfig.base.json",
+    "tsBuildInfoFile": "dist/tsconfig.tsbuildinfo",
     "declaration": true,
     "declarationMap": true,
     "ignoreDeprecations": "6.0",
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
-      "*": ["./*"],
-      "@chat-app-be/common": ["packages/common/src/index.ts"]
+      "@chat-app-be/common": ["../../packages/common/src/index.ts"]
     }
   },
   "include": ["src"],
