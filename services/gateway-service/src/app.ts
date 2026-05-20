@@ -21,6 +21,7 @@ export const createApp = (): Application => {
   app.use(
     createInternalAuthMiddleware(env.INTERNAL_AUTH_TOKEN, {
       headerName: 'x-internal-token',
+      exemptPaths: ['/auth/register', '/auth/login', '/auth/refresh'],
     })
   );
 

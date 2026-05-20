@@ -21,7 +21,6 @@ export const createInternalAuthMiddleware = (
     }
 
     const token = req.headers[headerName] as string | undefined;
-    console.debug(`[InternalAuth] Checking token ${req.headers[headerName]}`);
     if (!token || token !== expectedToken) {
       return res.status(401).json({
         statusCode: 401,

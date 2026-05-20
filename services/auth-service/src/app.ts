@@ -18,11 +18,7 @@ export const createApp = (): Application => {
   );
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
-  app.use(
-    createInternalAuthMiddleware(env.INTERNAL_AUTH_TOKEN, {
-      headerName: 'x-internal-auth',
-    })
-  );
+  app.use(createInternalAuthMiddleware(env.INTERNAL_AUTH_TOKEN));
 
   registerRoutes(app);
 
