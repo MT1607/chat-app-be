@@ -23,9 +23,9 @@ POST {{baseUrl}}/auth/register
 Content-Type: {{contentType}}
 
 {
-  "email": "anotheruser@example.com",
+  "email": "anotheruser1@example.com",
   "password": "SecurePass456!",
-  "displayName": "Another User"
+  "displayName": "Another User 1"
 }
 
 ### Register - Duplicate email (should fail with 409)
