@@ -19,7 +19,7 @@ export const createApp = (): Application => {
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
   app.use(
-    createInternalAuthMiddleware(env.INTERNAL_AUTH_TOKEN, {
+    createInternalAuthMiddleware(env.INTERNAL_API_TOKEN, {
       headerName: 'x-internal-token',
       exemptPaths: ['/auth/register', '/auth/login', '/auth/refresh'],
     })

@@ -9,7 +9,7 @@ const client = axios.create({
 
 const authHeader = {
   headers: {
-    'x-internal-token': env.INTERNAL_AUTH_TOKEN,
+    'x-internal-token': env.INTERNAL_API_TOKEN,
   },
 } as const;
 
