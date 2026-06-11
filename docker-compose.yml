@@ -14,6 +14,24 @@ services:
       - auth-service-db-data:/var/lib/mysql
     networks:
       - chatapp-network
+  user-service-db:
+    image: postgres:16
+    container_name: chatapp-user-db
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-chatapp_user_service}
+      POSTGRES_USER: ${POSTGRES_USER:-chatapp_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-chatapp_user_password}
+    ports:
+      - '${POSTGRES_PORT:-5432}:5432'
+    volumes:
+      - chatapp-user-db-data:/var/lib/postgresql/data
+    networks:
+      - chatapp-network
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U ${POSTGRES_USER:-chatapp_user}']
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   rabbitmq:
     image: rabbitmq:4-management
@@ -36,6 +54,7 @@ services:
 
 volumes:
   auth-service-db-data:
+  chatapp-user-db-data:
   rabbitmq-data:
 
 networks:
