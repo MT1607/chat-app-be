@@ -2,9 +2,12 @@ import { createApp } from '@/app';
 import { createServer } from 'http';
 import { env } from '@/config/env';
 import { logger } from '@/utils/logger';
+import { connectToDatabase } from '@/db/sequelize';
 
 const main = async (): Promise<void> => {
   try {
+    await connectToDatabase();
+
     const app = createApp();
     const server = createServer(app);
     const port = env.USER_SERVICE_PORT;
