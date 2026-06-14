@@ -23,6 +23,13 @@ export const connectToDatabase = async () => {
   }
 };
 
+export const initializeDatabase = async () => {
+  await connectToDatabase();
+  const syncOptions = env.NODE_ENV === 'development' ? { alter: true } : {};
+  await sequelize.sync(syncOptions);
+  logger.info('Database synchronized successfully.');
+};
+
 export const disconnectFromDatabase = async () => {
   try {
     await sequelize.close();

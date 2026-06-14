@@ -2,11 +2,13 @@ import { createApp } from '@/app';
 import { createServer } from 'http';
 import { env } from '@/config/env';
 import { logger } from '@/utils/logger';
-import { connectToDatabase } from '@/db/sequelize';
+import { initializeDatabase } from '@/db/sequelize';
+import { startAuthConsumer, stopAuthConsumer } from '@/messaging/auth-consumer';
 
 const main = async (): Promise<void> => {
   try {
-    await connectToDatabase();
+    await initializeDatabase();
+    await startAuthConsumer();
 
     const app = createApp();
     const server = createServer(app);
@@ -19,7 +21,7 @@ const main = async (): Promise<void> => {
     const shutdown = () => {
       logger.info('Shutting down user service');
 
-      Promise.all([])
+      Promise.all([stopAuthConsumer()])
         .catch((error) => {
           logger.error({ error }, 'Error during shutdown');
         })

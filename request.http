@@ -23,7 +23,7 @@ POST {{baseUrl}}/auth/register
 Content-Type: {{contentType}}
 
 {
-  "email": "anotheruser1@example.com",
+  "email": "JSON@example.com",
   "password": "SecurePass456!",
   "displayName": "Another User 1"
 }
