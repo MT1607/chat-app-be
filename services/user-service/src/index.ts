@@ -4,10 +4,12 @@ import { env } from '@/config/env';
 import { logger } from '@/utils/logger';
 import { initializeDatabase } from '@/db/sequelize';
 import { startAuthConsumer, stopAuthConsumer } from '@/messaging/auth-consumer';
+import { initMessaging } from '@/messaging/event-pushlisher';
 
 const main = async (): Promise<void> => {
   try {
     await initializeDatabase();
+    await initMessaging();
     await startAuthConsumer();
 
     const app = createApp();
