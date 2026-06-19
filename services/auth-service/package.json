@@ -22,6 +22,7 @@
   "dependencies": {
     "@chat-app-be/common": "workspace:^",
     "@types/jest": "^30.0.0",
+    "@types/sequelize": "^6.12.0",
     "amqplib": "^2.0.1",
     "bcrypt": "^6.0.0",
     "cors": "^2.8.6",

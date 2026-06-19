@@ -4,7 +4,7 @@ import { env } from '@/config/env';
 import { logger } from '@/utils/logger';
 import { connectToDatabase, disconnectFromDatabase } from '@/db/sequelize';
 import { initModels } from '@/models';
-import { closePublisher, initPublisher } from './messaging/event-publishing';
+import { closePublisher, initPublisher } from '@/messaging/event-publishing';
 
 const main = async (): Promise<void> => {
   try {
