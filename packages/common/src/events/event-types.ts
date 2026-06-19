@@ -7,9 +7,8 @@ export interface DomainEvent<T extends string, P extends EventPayload> {
 }
 
 export interface EventMetadata {
-  correlationId?: string;
-  causationId?: string;
-  version?: unknown;
+  correlationId: string;
+  causationId: string;
 }
 
 export interface OutboundEvent<T extends string, P extends EventPayload> extends DomainEvent<T, P> {

@@ -83,7 +83,7 @@ export const publishUserCreatedEvent = async (payload: UserCreatedPayload) => {
     return;
   }
 
-  const event: UserCreatedEvent = {
+  const event = {
     type: USER_CREATED_ROUTING_KEY,
     payload,
     occurredAt: new Date().toISOString(),

@@ -1,4 +1,4 @@
-import { authProxyService } from '@/services/auth-proxy.services';
+import { authProxyService } from '@/services/auth-proxy.service';
 import { loginSchema, refreshSchema, registerSchema, revokeSchema } from '@/validation/auth.schema';
 import { AsyncHandler } from '@chat-app-be/common/src';
 

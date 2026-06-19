@@ -6,7 +6,12 @@ export interface User {
   updatedAt: Date;
 }
 
-export interface CreatedUser {
+// export interface CreatedUser {
+//   email: string;
+//   displayName: string;
+// }
+
+export interface CreateUserInput {
   email: string;
   displayName: string;
 }

@@ -18,7 +18,7 @@ export const createApp = (): Application => {
   );
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
-  app.use(createInternalAuthMiddleware(env.INTERNAL_API_TOKEN));
+  app.use(createInternalAuthMiddleware(env.INTERNAL_API_TOKEN, { exemptPaths: ['/users/health'] }));
 
   registerRoutes(app);
 

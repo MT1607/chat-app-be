@@ -1,12 +1,25 @@
-import { Router, type Request, type Response, type NextFunction } from 'express';
-import { asyncHandler } from '@chat-app-be/common';
-import { getUsersController } from '@/controllers/users.controller';
+import { Router } from 'express';
+import { asyncHandler, validateRequest } from '@chat-app-be/common';
+import { createUser, getAllUsers, getUser, searchUsers } from '@/controllers/users.controller';
+import {
+  createUserSchema,
+  searchUsersQuerySchema,
+  userIdParamSchema,
+} from '@/validation/user.schema';
 
 export const usersRouter: Router = Router();
 
 usersRouter.get(
-  '/',
-  asyncHandler(async (req: Request, res: Response, _next: NextFunction) => {
-    await getUsersController(req, res);
-  })
+  '/search',
+  validateRequest({ query: searchUsersQuerySchema }),
+  asyncHandler(searchUsers)
 );
+
+// Get all users
+usersRouter.get('/', asyncHandler(getAllUsers));
+
+// Get user by ID
+usersRouter.get('/:id', validateRequest({ params: userIdParamSchema }), asyncHandler(getUser));
+
+// Create user
+usersRouter.post('/', validateRequest({ body: createUserSchema }), asyncHandler(createUser));

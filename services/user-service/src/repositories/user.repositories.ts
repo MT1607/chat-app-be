@@ -1,6 +1,7 @@
 import { UserModel } from '@/db';
-import { User } from '@/types/user';
+import { CreateUserInput, User } from '@/types/user';
 import type { AuthUserRegisteredPayload } from '@chat-app-be/common';
+import { Op, WhereOptions } from 'sequelize';
 
 const toDomainUser = (user: UserModel): User => ({
   id: user.id,
@@ -18,6 +19,36 @@ export class UserRepository {
 
   async findAll(): Promise<User[]> {
     const users = await UserModel.findAll({ order: [['createdAt', 'ASC']] });
+    return users.map(toDomainUser);
+  }
+
+  async create(data: CreateUserInput): Promise<User> {
+    const user = await UserModel.create(data);
+    return toDomainUser(user);
+  }
+
+  async searchByQuery(
+    query: string,
+    options: { limit?: number; excludeIds?: string[] }
+  ): Promise<User[]> {
+    const where: WhereOptions = {
+      [Op.or]: [
+        { displayName: { [Op.like]: `%${query}%` } },
+        { email: { [Op.like]: `%${query}%` } },
+      ],
+    };
+
+    if (options.excludeIds && options.excludeIds.length > 0) {
+      Object.assign(where, {
+        [Op.and]: [{ id: { [Op.notIn]: options.excludeIds } }],
+      });
+    }
+
+    const users = await UserModel.findAll({
+      where,
+      order: [['displayName', 'ASC']],
+      limit: options.limit ?? 10,
+    });
     return users.map(toDomainUser);
   }
 
