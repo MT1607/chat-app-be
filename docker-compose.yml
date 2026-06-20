@@ -52,10 +52,30 @@ services:
       timeout: 10s
       retries: 5
 
+  mongodb:
+    image: mongo:7.0
+    container_name: chatapp-mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME:-admin}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD:-admin_password}
+      MONGO_INITDB_DATABASE: ${MONGO_DB_NAME:-chatapp}
+    ports:
+      - '${MONGO_PORT:-27017}:27017'
+    volumes:
+      - mongodb-data:/data/db
+    networks:
+      - chatapp-network
+    healthcheck:
+      test: mongosh --eval 'db.adminCommand("ping")'
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
 volumes:
   auth-service-db-data:
   chatapp-user-db-data:
   rabbitmq-data:
+  mongodb-data:
 
 networks:
   chatapp-network:
