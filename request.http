@@ -13,9 +13,9 @@ POST {{baseUrl}}/auth/register
 Content-Type: {{contentType}}
 
 {
-  "email": "testuser@example.com",
+  "email": "anna@example.com",
   "password": "Password123!",
-  "displayName": "Test User"
+  "displayName": "Anna"
 }
 
 ### Register - Valid request with different user
