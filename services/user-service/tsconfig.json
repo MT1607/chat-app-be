@@ -15,6 +15,6 @@
       "@chat-app-be/common": ["packages/common/src/index.ts"]
     }
   },
-  "include": ["src"],
+  "include": ["src", "../chat-service/src/types/conversation.ts"],
   "references": [{ "path": "../../packages/common" }]
 }
