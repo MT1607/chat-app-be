@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { chatRouter } from '@/routes/chat.routes';
+import { conversationRouter } from '@/routes/conversation.routes';
 
 export const registerRoutes = (app: Router) => {
-  app.use('/chat', chatRouter);
+  app.use('/conversations', conversationRouter);
 };
